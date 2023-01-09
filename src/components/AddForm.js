@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
-const AddForm = ({todos,setTodos}) => {
+import { useDispatch } from "react-redux";
+
+const AddForm = () => {
+  const dispatch=useDispatch()
   const [text, setText] = useState("");
 
   const handleSubmit=(event)=>{
@@ -11,7 +14,8 @@ const AddForm = ({todos,setTodos}) => {
         isDone:false,
         date: new Date()
     }
-    setTodos([...todos,newTodo])
+    dispatch({type:"ADD_TODO",payload:newTodo})
+    setText("")
   }
   return (
     <form onSubmit={handleSubmit}>

@@ -1,16 +1,21 @@
 import React from "react";
 
+import { useSelector } from "react-redux";
+
 import SingleTodo from "./SingleTodo";
 
-const ListTodos = ({ todos, setTodos }) => {
+const ListTodos = () => {
+  const {todosState}=useSelector((state)=>state)
+
+
   return (
     <div>
-      {todos.length === 0 ? (
+      {todosState.todos.length === 0 ? (
         <p>Henüz kayıtlı bir todo yok</p>
       ) : (
         <>
-          {todos.map((todo) => (
-            <SingleTodo todo={todo} setTodos={setTodos} todos={todos} />
+          {todosState.todos.map((todo) => (
+            <SingleTodo todo={todo}  />
           ))}
         </>
       )}

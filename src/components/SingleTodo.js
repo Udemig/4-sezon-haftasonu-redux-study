@@ -1,15 +1,20 @@
 import React from "react";
 
-const SingleTodo=({todo,todos,setTodos})=>{
+import { useDispatch } from "react-redux";
 
+const SingleTodo=({todo})=>{
+    const dispatch=useDispatch()
     const handleDelete=()=>{
-        const filteredTodos=todos.filter(item=>item.id !== todo.id)
-        setTodos(filteredTodos)
+        dispatch({type:"DELETE_TODO",payload: todo.id})
+    }
+    const handleIsDone=()=>{
+        dispatch({type:"EDIT_ISDONE",payload:todo.id})
     }
     return(
         <div>
-            <h2>{todo.text}</h2>
+            <h2 style={{textDecoration:todo.isDone === true ? "line-through" : "none"}}>{todo.text}</h2>
             <button onClick={handleDelete}>Sil</button>
+            <button onClick={handleIsDone}>{todo.isDone === true ? "Yapılmadı İşaretle" : "Yapıldı İşaretle"}</button>
             <hr />
         </div>
     )
